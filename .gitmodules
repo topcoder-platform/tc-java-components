@@ -1,3 +1,4 @@
 [submodule "components/auto_pilot"]
 	path = components/auto_pilot
 	url = git@github.com:topcoder-platform/autopilot.git
+        branch = dev-components
