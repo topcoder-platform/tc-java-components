@@ -453,7 +453,7 @@ public class SqlUploadPersistence implements UploadPersistence {
             + "upload_type_lu.name, upload_type_lu.description, "
             + "upload_status_lu.upload_status_id, upload_status_lu.create_user, upload_status_lu.create_date, "
             + "upload_status_lu.modify_user, upload_status_lu.modify_date, "
-            + "upload_status_lu.name, upload_status_lu.description " + "FROM upload INNER JOIN upload_type_lu "
+            + "upload_status_lu.name, upload_status_lu.description, upload.url " + "FROM upload INNER JOIN upload_type_lu "
             + "ON upload.upload_type_id=upload_type_lu.upload_type_id " + "INNER JOIN upload_status_lu "
             + "ON upload.upload_status_id=upload_status_lu.upload_status_id " + "WHERE upload_id IN ";
 
@@ -470,7 +470,7 @@ public class SqlUploadPersistence implements UploadPersistence {
         Helper.LONG_TYPE, Helper.STRING_TYPE, Helper.STRING_TYPE, Helper.LONG_TYPE, Helper.STRING_TYPE,
         Helper.DATE_TYPE, Helper.STRING_TYPE, Helper.DATE_TYPE, Helper.STRING_TYPE, Helper.STRING_TYPE,
         Helper.LONG_TYPE, Helper.STRING_TYPE, Helper.DATE_TYPE, Helper.STRING_TYPE, Helper.DATE_TYPE,
-        Helper.STRING_TYPE, Helper.STRING_TYPE};
+        Helper.STRING_TYPE, Helper.STRING_TYPE, Helper.STRING_TYPE};
 
     /**
      * <p>
@@ -514,7 +514,7 @@ public class SqlUploadPersistence implements UploadPersistence {
             + "upload_type_lu.name, upload_type_lu.description, "
             + "upload_status_lu.upload_status_id, upload_status_lu.create_user, upload_status_lu.create_date, "
             + "upload_status_lu.modify_user, upload_status_lu.modify_date, "
-            + "upload_status_lu.name, upload_status_lu.description " + "FROM submission "
+            + "upload_status_lu.name, upload_status_lu.description, upload.url " + "FROM submission "
             + "INNER JOIN submission_status_lu ON submission.submission_status_id "
             + "= submission_status_lu.submission_status_id "
             + "INNER JOIN submission_type_lu ON submission.submission_type_id = submission_type_lu.submission_type_id "
@@ -552,7 +552,7 @@ public class SqlUploadPersistence implements UploadPersistence {
         Helper.LONG_TYPE, Helper.LONG_TYPE, Helper.LONG_TYPE, Helper.STRING_TYPE, Helper.STRING_TYPE,
         Helper.LONG_TYPE, Helper.STRING_TYPE, Helper.DATE_TYPE, Helper.STRING_TYPE, Helper.DATE_TYPE,
         Helper.STRING_TYPE, Helper.STRING_TYPE, Helper.LONG_TYPE, Helper.STRING_TYPE, Helper.DATE_TYPE,
-        Helper.STRING_TYPE, Helper.DATE_TYPE, Helper.STRING_TYPE, Helper.STRING_TYPE
+        Helper.STRING_TYPE, Helper.DATE_TYPE, Helper.STRING_TYPE, Helper.STRING_TYPE, Helper.STRING_TYPE
     };
 
     /**
@@ -1937,6 +1937,7 @@ public class SqlUploadPersistence implements UploadPersistence {
         UploadStatus uploadStatus = new UploadStatus();
         startIndex = Helper.loadNamedEntityFieldsSequentially(uploadStatus, row, startIndex);
         upload.setUploadStatus(uploadStatus);
+        upload.setUrl((String) row[startIndex++]);
 
         return startIndex;
     }
@@ -2236,6 +2237,7 @@ public class SqlUploadPersistence implements UploadPersistence {
             upload.setOwner(resultSet.getLong("resource_id"));
             upload.setParameter(resultSet.getString("upload_parameter"));
             upload.setDescription(resultSet.getString("upload_desc"));
+            upload.setUrl(resultSet.getString("url"));
 
             // create a new UploadType object
             UploadType uploadType = new UploadType();
