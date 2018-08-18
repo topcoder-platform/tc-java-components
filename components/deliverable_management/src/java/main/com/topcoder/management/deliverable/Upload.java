@@ -96,6 +96,11 @@ public class Upload extends AuditedDeliverableStructure {
     private String parameter = null;
 
     /**
+     * Url path of uploaded file
+     */
+    private String url;
+
+    /**
      * Represents the description of this upload.
      *
      * @since 1.2
@@ -279,5 +284,19 @@ public class Upload extends AuditedDeliverableStructure {
                     && (project != UNSET_PROJECT)
                     && (parameter != null)
                     && (super.isValidToPersist()));
+    }
+
+    /**
+     * Get url
+     */
+    public String getUrl() {
+        return url;
+    }
+
+    /**
+     * Set url
+     */
+    public void setUrl(String url) {
+        this.url = url;
     }
 }
