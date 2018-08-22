@@ -1,0 +1,4 @@
+[submodule "tc-components-dev/autopilot"]
+	path = tc-components-dev/autopilot
+	url = https://github.com/topcoder-platform/autopilot.git
+        branch = maven
