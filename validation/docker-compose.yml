@@ -1,0 +1,80 @@
+version: '2'
+services:
+  tc-informix:
+    image: "appiriodevops/tc-database-scripts:latest"
+    hostname: informix.cloud.topcoder.com
+    container_name: iif_innovator_c
+    environment: 
+      LICENSE: accept
+    ports:
+      - "2021:2021"
+      - "2022:2022"
+      - "27017:27017"
+      - "27018:27018"
+      - "27883:27883"
+    tty: true
+  
+  tc-cache:
+    image: "redis:3.2.5"
+    ports:
+      - "6379:6379"
+
+  tc-direct:
+    image: "appiriodevops/direct-app:latest"
+    links:
+      - "tc-informix"
+      - "tc-cache"
+      - "mock-services:tc-api.cloud.topcoder.com"
+    hostname: cockpit.cloud.topcoder.com
+    ports:
+      - "443:443"
+      - "8180:8180"
+      - "1198:1198"
+      - "1199:1199"
+      - "3973:3973"
+      - "5446:5446"
+  
+  mock-services:
+    image: "appiriodevops/mock-services:latest"
+    ports:
+      - "8080:8080"
+      - "8443:8443"
+
+  build-online-review:
+    image: "appiriodevops/online-review:build"
+    volumes:
+      - "${ONLINE_REVIEW_SOURCE_ROOT}:/root/online_review"
+      - "${ONLINE_REVIEW_DEPLOYMENT_DIR}:/root/deployment"
+    environment:
+      - DISABLE_ONLINE_REVIEW=${DISABLE_ONLINE_REVIEW}
+      - DISABLE_AUTO_PILOT=${DISABLE_AUTO_PILOT}
+      - DISABLE_LATE_DELIVERABLES_TRACKER=${DISABLE_LATE_DELIVERABLES_TRACKER}
+      - DISABLE_REVIEW_ASSIGNMENT=${DISABLE_REVIEW_ASSIGNMENT}
+    entrypoint: /root/scripts/build.sh
+
+  run-online-review:
+    image: "appiriodevops/online-review:build"
+    volumes:
+      - "${ONLINE_REVIEW_DEPLOYMENT_DIR}:/root/deployment"
+    environment:
+      - JAVA_OPTS=-Xms256m -Xmx512m
+      - DISABLE_ONLINE_REVIEW=${DISABLE_ONLINE_REVIEW}
+      - DISABLE_AUTO_PILOT=${DISABLE_AUTO_PILOT}
+      - DISABLE_LATE_DELIVERABLES_TRACKER=${DISABLE_LATE_DELIVERABLES_TRACKER}
+      - DISABLE_REVIEW_ASSIGNMENT=${DISABLE_REVIEW_ASSIGNMENT}
+    ports:
+      - "80:8080"
+    links:
+      - tc-informix:db
+      - "mock-services:tc-api.cloud.topcoder.com"
+      - mail
+    entrypoint: /root/scripts/run.sh
+  mail:
+    image: "centos:6.8"
+    command: python -m smtpd -n -c DebuggingServer 0.0.0.0:25
+    ports:
+      - "25:25"
+
+
+
+
