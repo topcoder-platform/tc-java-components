@@ -168,8 +168,9 @@ public abstract class FileUpload {
         int index = uniqueFileName.indexOf("_");
 
         if (index < 0) {
-            throw new IllegalArgumentException("The uniqueFileName: " + uniqueFileName
-                + " does not contain \"_\" in the string.");
+            // throw new IllegalArgumentException("The uniqueFileName: " + uniqueFileName
+            //     + " does not contain \"_\" in the string.");
+            return uniqueFileName;
         }
 
         return uniqueFileName.substring(index + 1);
