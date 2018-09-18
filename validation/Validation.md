@@ -50,6 +50,25 @@ mvn install:install-file -DcreateChecksum=true -DgroupId=com.topcoder.internal -
 mvn install:install-file -DcreateChecksum=true -DgroupId=com.topcoder.internal -DartifactId=tcwebcommon -Dversion=1.0.0 -DmodelVersion=4.0.0 -Dpackaging=jar -Dfile=lib/tcwebcommon.jar
 ```
 
+```
+cd <or>
+
+mvn install:install-file -DcreateChecksum=true -DgroupId=com.topcoder.internal -DartifactId=shared -Dversion=1.0.0 -DmodelVersion=4.0.0 -Dpackaging=jar -Dfile=lib/shared/shared.jar
+
+mvn install:install-file -DcreateChecksum=true -DgroupId=com.topcoder.internal -DartifactId=catalog -Dversion=1.0.0 -DmodelVersion=4.0.0 -Dpackaging=jar -Dfile=lib/shared/catalog.jar
+
+mvn install:install-file -DcreateChecksum=true -DgroupId=com.topcoder.internal -DartifactId=tcjive -Dversion=1.0.0 -DmodelVersion=4.0.0 -Dpackaging=jar -Dfile=lib/tcs/tcjive.jar
+
+mvn install:install-file -DcreateChecksum=true -DgroupId=com.topcoder.internal -DartifactId=tc_id_generator -Dversion=1.0.0 -DmodelVersion=4.0.0 -Dpackaging=jar -Dfile=lib/tcs/tc_id_generator.jar
+
+mvn install:install-file -DcreateChecksum=true -DgroupId=com.topcoder.internal -DartifactId=jiveforums -Dversion=1.0.0 -DmodelVersion=4.0.0 -Dpackaging=jar -Dfile=lib/third_party/jive/jiveforums.jar
+
+mvn install:install-file -DcreateChecksum=true -DgroupId=com.topcoder.internal -DartifactId=jivebase -Dversion=1.0.0 -DmodelVersion=4.0.0 -Dpackaging=jar -Dfile=lib/third_party/jive/jivebase.jar
+
+mvn install:install-file -DcreateChecksum=true -DgroupId=com.topcoder.internal -DartifactId=security_ejb -Dversion=1.0.0 -DmodelVersion=4.0.0 -Dpackaging=jar -Dfile=lib/tcs/security_ejb/Security.jar
+
+```
+
 ## Build and Install Components
 ```
 cd <tc-components-dev>

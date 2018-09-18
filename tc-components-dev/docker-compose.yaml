@@ -1,0 +1,9 @@
+version: '3'
+
+services:
+  build-maven:
+    image: "maven:3-jdk-7"
+    volumes:
+      - "./:/root/components"
+      - "$HOME/.m2:/root/.m2"
+    working_dir: /root/components
