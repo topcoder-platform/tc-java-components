@@ -51,11 +51,6 @@
     </dependency>
     <dependency>
       <groupId>tc-components</groupId>
-      <artifactId>object_factory</artifactId>
-      <version>2.2.0</version>
-    </dependency>
-    <dependency>
-      <groupId>tc-components</groupId>
       <artifactId>object_factory_config_manager_plugin</artifactId>
       <version>1.1.0</version>
     </dependency>

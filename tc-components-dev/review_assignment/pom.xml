@@ -33,16 +33,19 @@
       <groupId>com.topcoder.internal</groupId>
       <artifactId>tcwebcommon</artifactId>
       <version>1.0.0</version>
+      <scope>provided</scope>
     </dependency>
     <dependency>
       <groupId>com.topcoder.internal</groupId>
       <artifactId>online_review</artifactId>
       <version>1.0.0</version>
+      <scope>provided</scope>
     </dependency>
     <dependency>
       <groupId>com.topcoder.internal</groupId>
       <artifactId>forums</artifactId>
       <version>1.0.0</version>
+      <scope>provided</scope>
     </dependency>
     <dependency>
       <groupId>javax.ejb</groupId>

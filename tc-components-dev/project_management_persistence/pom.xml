@@ -66,11 +66,6 @@
     </dependency>
     <dependency>
       <groupId>tc-components</groupId>
-      <artifactId>logging_wrapper</artifactId>
-      <version>2.0.0</version>
-    </dependency>
-    <dependency>
-      <groupId>tc-components</groupId>
       <artifactId>type_safe_enum</artifactId>
       <version>1.1.0</version>
     </dependency>
