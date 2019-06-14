@@ -143,7 +143,21 @@ public class RatingType extends Enum implements Serializable {
      * </p>
      */
     public static final String REPORTING_NAME = "Reporting";
-    
+
+    /**
+     * <p>
+     * The name of the First2Finish rating type, and the property name that stores the First2Finish phase number.
+     * </p>
+     */
+    public static final String FIRST2FINISH_NAME = "First2Finish";
+
+    /**
+     * <p>
+     * The name of the Code rating type, and the property name that stores the Code phase number.
+     * </p>
+     */
+    public static final String CODE_NAME = "Code";
+
     /**
      * <p>
      * The rating type that represents the architecture phase.
@@ -234,7 +248,21 @@ public class RatingType extends Enum implements Serializable {
      * </p>
      */
     public static final RatingType REPORTING = getRatingType(REPORTING_NAME);
-    
+
+    /**
+     * <p>
+     * The rating type that represents the First2Finish phase.
+     * </p>
+     */
+    public static final RatingType FIRST2FINISH = getRatingType(FIRST2FINISH_NAME);
+
+    /**
+     * <p>
+     * The rating type that represents the Code phase.
+     * </p>
+     */
+    public static final RatingType CODE = getRatingType(CODE_NAME);
+
     /**
      * <p>
      * The default integer code of the architecture phase.
@@ -328,6 +356,20 @@ public class RatingType extends Enum implements Serializable {
 
     /**
      * <p>
+     * The default integer code of the First2Finish phase.
+     * </p>
+     */
+    private static final int DEFAULT_FIRST2FINISH_CODE = 149;
+
+    /**
+     * <p>
+     * The default integer code of the Code phase.
+     * </p>
+     */
+    private static final int DEFAULT_CODE_CODE = 150;
+
+    /**
+     * <p>
      * The name of the rating type as set in the constructor and accessed by getName. Will never be null or empty after
      * trim.
      * </p>
@@ -398,13 +440,17 @@ public class RatingType extends Enum implements Serializable {
             } else if (typeName.equals(UI_PROTOTYPE_NAME)) {
                 enumRatingType = new RatingType(DEFAULT_UI_PROTOTYPE_CODE, typeName);
             } else if (typeName.equals(RIA_BUILD_NAME)) {
-        	enumRatingType = new RatingType(DEFAULT_RIA_BUILD_CODE, typeName);
+                enumRatingType = new RatingType(DEFAULT_RIA_BUILD_CODE, typeName);
             } else if (typeName.equals(COPILOT_POSTING_NAME)) {
-        	enumRatingType = new RatingType(DEFAULT_COPILOT_POSTING_CODE, typeName);
+                enumRatingType = new RatingType(DEFAULT_COPILOT_POSTING_CODE, typeName);
             } else if (typeName.equals(CONTENT_CREATION_NAME)) {
-        	enumRatingType = new RatingType(DEFAULT_CONTENT_CREATION_CODE, typeName);
+                enumRatingType = new RatingType(DEFAULT_CONTENT_CREATION_CODE, typeName);
             } else if (typeName.equals(REPORTING_NAME)) {
-        	enumRatingType = new RatingType(DEFAULT_REPORTING_CODE, typeName);
+                enumRatingType = new RatingType(DEFAULT_REPORTING_CODE, typeName);
+            } else if (typeName.equals(FIRST2FINISH_NAME)) {
+                enumRatingType = new RatingType(DEFAULT_FIRST2FINISH_CODE, typeName);
+            } else if (typeName.equals(CODE_NAME)) {
+                enumRatingType = new RatingType(DEFAULT_CODE_CODE, typeName);
             } else {
                 enumRatingType = new RatingType(0, typeName);
             }
@@ -442,8 +488,9 @@ public class RatingType extends Enum implements Serializable {
             }
         }
 
-        // Not found.
-        return null;
+        // You can throw an exception or return a new type without exception, we use first solution
+		throw new IllegalArgumentException("Unknown RatingType " + id);	// first solution
+        // return new RatingType(0, "Unknown RatingType"+id);			// second solution
     }
 
     /**
